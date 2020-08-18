@@ -1,0 +1,555 @@
+    1  yum install -y yum-utils
+    2  yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+    3  yum install docker-ce docker-ce-cli containerd.io
+    4  systemctl start docker
+    5  systemctl enable docker
+    6  systemctl status docker
+    7  history
+    8  docker --version
+    9  docker
+   10  docker container run --publish 80:80 --detach nginx
+   11  docker images
+   12  docker container ls
+   13  docker ps
+   14  docker container ls -a
+   15  docker container run --publish 81:80 --detach httpd
+   16  docker container ls -a
+   17  docker ps
+   18  curl localhost:81
+   19  curl localhost:80
+   20  docker ps
+   21  docker container run --publish 82:80 --detach nginx
+   22  docker ps
+   23  docker conatiner stop dfe3
+   24  docker container stop dfe3
+   25  docker ps -a
+   26  docker container start dfe3
+   27  docker ps -a
+   28  docker run --name tesla -d tesla
+   29  docker run --name mongo -d mongo
+   30  docker ps
+   31  docker top mongo
+   32  docker top nginx
+   33  ps
+   34  top
+   35  docker top nginx
+   36  docker top mongo
+   37  ps aux
+   38  docker exec -it mongo bash
+   39  docker conatiner run -d -p 3306:3306 --name db -e MYSQL_RANDOM_ROOT_PASSWORD=true mysql
+   40  docker container run -d -p 3306:3306 --name db -e MYSQL_RANDOM_ROOT_PASSWORD=true mysql
+   41  docker ps
+   42  docker exec -it mysql bash
+   43  docker exec -it db bash
+   44  docker container logs db
+   45  docker exec -it db bash
+   46  docker ps
+   47  docker container inspect db
+   48  docker container stats
+   49  history
+   50  ping google.com
+   51  docker container inspect --format '{{.NetworkSettings.IPAddress}}' db
+   52  ip a
+   53  docker network ls
+   54  docker container inspect nginx
+   55  docker run -d --name newapache --network host nginx
+   56  docker container inspect nginx
+   57  docker ps
+   58  docker container inspect bridge
+   59  docker network
+   60  docker network ls
+   61  docker container run -d --name newapache --network host nginx
+   62  docker ps
+   63  docker network ls
+   64  docker network inspect bridge
+   65  docker run -d --name newapache --network host nginx
+   66  docker ps
+   67  docker network ls
+   68  docker network create my_app
+   69  docker network ls
+   70  docker run -d --name new_nginx --network my_app nginx:alpine
+   71  docker container exec -it my_ngnix --network my_app nginx:alpine
+   72  docker ps
+   73  docker container exec -it hardcore_buck --network my_app nginx:alpine
+   74  history
+   75  docker run -d --name new_nginx --network my_app nginx:alpine
+   76  docker run -d --name my_nginx --network my_app nginx:alpine
+   77  docker ps
+   78  docker container exec -it my_nginx ping new_nginx
+   79  docker container exec -it new_nginx ping my_nginx
+   80  docker container inspect my_app
+   81  docker network inspect my_app
+   82  docker ps
+   83  docker volume
+   84  docker volume ls
+   85  docker ps
+   86  docker rm hardcore_buck
+   87  docker stop hardcore_buck
+   88  docker rm hardcore_buck
+   89  docker ps
+   90  docker volume ls
+   91  docker rm hopeful_edison
+   92  docker stop hopeful_edison
+   93  docker rm hopeful_edison
+   94  docker ps
+   95  docker stop db
+   96  docker rm db
+   97  docker ps
+   98  docker run -d --name mysql -e MYSQL_ALLOW_EMPTY_PASSWORD=True -v mysql-db:/var/lib/mysql mysql
+   99  docker ps
+  100  docker volume ls
+  101  docker volume
+  102  docker volume inspect mysql-db
+  103  docker ps
+  104  docker exec -it mysql bash
+  105  docker volume ls
+  106  docker rm mysql -f
+  107  docker volume ls
+  108  docker run -d --name mysql -e MYSQL_ALLOW_EMPTY_PASSWORD=True -v mysql-db:/var/lib/mysql mysql
+  109  docker exec -it mysql bash
+  110  curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  111  chmod +x /usr/local/bin/docker-compose
+  112  ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+  113  docker-compose
+  114  docker-compose --version
+  115  mkdir project
+  116  touch docker-compose.yaml
+  117  vi docker-compose.yaml 
+  118  ls
+  119  mv docker-compose.yaml project/
+  120  ls
+  121  cd project/
+  122  ls
+  123  vi docker-compose.yaml 
+  124  docker compose up -d
+  125  docker-compose up -d
+  126  ls
+  127  rm docker-compose.yaml 
+  128  vi docker-compose.yaml 
+  129  docker network ls
+  130  docker volume ls
+  131  docker ps
+  132  docker swarm init
+  133  docker volume ls
+  134  history
+  135  docker swarm init
+  136  docker node ls
+  137  docker swarm leave -f
+  138  docker swarm init
+  139  docker node ls
+  140  docker service create --replicas 2 --name helloworld alpine ping docker.com
+  141  docker service ls
+  142  docker ps
+  143  docker service ps helloworld
+  144  docker service  create -help
+  145  docker service  create --help
+  146  docker service create --replicas 2 --name webservice nginx
+  147  docker service ps webservice
+  148  docker service inspect --pretty webservice
+  149  docker service inspect webservice
+  150  docker service scale webservice
+  151  docker service scale webservice=5
+  152  docker service ps webservice
+  153  docker ps
+  154  docker service create --replicas 3 --name redis --update-delay 10s redis:3.0.6
+  155  docker service ps redis
+  156  docker service inspect --pretty redis
+  157  docker service update --image redis:3.0.7 redis
+  158  docker service inspect --pretty redis
+  159  docker service ps redis
+  160  docker node ls
+  161  docker node update --availability drain ip-172-31-34-161.ap-south-1.compute.internal
+  162  docker service ps redis
+  163  docker node update --availability active ip-172-31-34-161.ap-south-1.compute.internal
+  164  docker service ps redis
+  165  docker node update --availability active ip-172-31-34-161.ap-south-1.compute.internal
+  166  docker service ps redis
+  167  docker node ls/
+  168  docker node ls
+  169  docker node update --availability drain ip-172-31-34-161.ap-south-1.compute.internal
+  170  docker node ls
+  171  docker node update --availability active ip-172-31-34-161.ap-south-1.compute.internal
+  172  docker node ls
+  173  docker service create --name my-web --publish published=8080,target=80 --replicas 2 nginx
+  174  docker ps
+  175  docker service inspect --format="{{json.Endpoints.Spec.Ports))"my-web
+  176  docker service inspect --format="{{json.Endpoints.Spec.Ports))"my-web"
+  177  "
+  178  docker service inspect --format="{{json.Endpoints.Spec.Ports}}"my-web
+  179  docker service inspect --format="{{json.Endpoint.Spec.Ports}}"my-web
+  180  docker service inspect --format="{{json.Endpoint.Spec.Ports}}" my-web
+  181  docker service inspect my-web
+  182  docker service inspect --format="{{json.Endpoint.Spec.PublishedPorts}}" my-web
+  183  docker service inspect --format="{{json.Endpoint.Spec.Ports.PublishedPort}}" my-web
+  184  docker service inspect --format="{{json.Endpoint.Spec.Ports.PublishedPort}}"my-web
+  185  docker images
+  186  mkdir project2
+  187  cd project2
+  188  vi test
+  189  mv test helloworld.java
+  190  ls
+  191   yum install java-1.8.0-openjdk-devel
+  192  vi helloworld.java 
+  193  javac helloworld.java 
+  194  vi helloworld.java 
+  195  javac helloworld.java 
+  196  java helloworld
+  197  vi manifest.txt
+  198  jar cfm helloworld.jar manifest.txt  helloworld.class
+  199  java -jar helloworld.jar
+  200  ls
+  201  touch Dockerfile
+  202  vi Dockerfile 
+  203  cat Dockerfile 
+  204  vi Dockerfile 
+  205  docker build -t helloworld-img .
+  206  docker images
+  207  docker run helloworld-img
+  208  vi Dockerfile 
+  209  docker build -t hello-world-jdk .
+  210  docker images
+  211  docker rmi mongo
+  212  docker login
+  213  ls
+  214  docker images
+  215  docker tag
+  216  docker tag 8093367f23a2 swapnaraj/swapnaimage
+  217  docker image
+  218  docker images
+  219  docker push swapnaraj/swapnaimage
+  220  ls -l
+  221  docker pull meghnasreddy/helloimg
+  222  docker images
+  223  docker run -d -p 50000:5000 --restart=always --name registry registry:2
+  224  docker ps
+  225  docker service ls
+  226  service rm helloworld my-web redis 
+  227  docker images
+  228  docker tag  571a116cf7d7 localhost:5000/swapnaimage
+  229  docker push localhost:5000/swapnaimage
+  230  service rm helloworld my-web redis webservice
+  231  docker tag localhost:5000/
+  232  docker tag 8093367f23a2 localhost:5000/swapnaimage
+  233  docker push localhost:5000/swapnaimage
+  234  docker images
+  235  docker ps
+  236  docker tag  571a116cf7d7 localhost:50000/swapnaimage
+  237  docker push localhost:50000/swapnaimage
+  238  curl -X GET http://localhost:50000/v2/_catalog
+  239  ls
+  240  cd ..
+  241  mkdir project3
+  242  cd project3
+  243  touch package.json
+  244  vi package.json 
+  245  curl -sL https://rpm.nodesource.com/setup_10.x | sudo bash 
+  246  yum install -y nodejs
+  247  history
+  248  npm install
+  249  ls
+  250  vi server.js
+  251  vi Dockerfile
+  252  vi .dockerignore file
+  253  ls
+  254  vi .dockerignore 
+  255  cat .dockerignore 
+  256  ls
+  257  docker build -t swapnaraj/node-web-app
+  258  docker build -t node-web-app
+  259  docker build -t swapnaraj/node-web-app
+  260  vi Dockerfile
+  261  docker build -t swapnaraj/node-web-app
+  262  vi Dockerfile
+  263  ls
+  264  docker build -t swapnaraj/
+  265  docker build -t swapnaraj/node-web-app
+  266  docker build -t swapnaraj/node-web-app .
+  267  docker images
+  268  docker run -p 49160:8080 -d swapnaraj/node-web-app
+  269  docker ps
+  270  docker logs 9116e4003180
+  271  docker exec -it 9116e4003180 /bin/bash
+  272  docker ps
+  273  curl -i localhost:49160
+  274  docker ps
+  275  docker images
+  276  docker tag 0ff124d31638 swapnaraj/node-web-app-image
+  277  docker images
+  278  docker push swapnaraj/node-web-app-image
+  279  docker images
+  280  yum install git
+  281  git config --global user.name "swapnaraj"
+  282  git config --global user.email "swapna.swapnaraj@gmail.com"
+  283  git init
+  284  git add
+  285  git add .
+  286  ls
+  287  cd node_modules/
+  288  ls
+  289  cd ..
+  290  ls
+  291  git commit -m "mynodeapplication"
+  292  git remote add origin https://github.com/swapnaraj-mg/nodejsapp.git
+  293  git push -u origin master
+  294  ls
+  295  git status
+  296  vi myscript.py
+  297  git status
+  298  git add myscript.py 
+  299  git status
+  300  git commit -m "add new file"
+  301  git push -u origin master
+  302  ls
+  303  cat package.json 
+  304  cat server.js 
+  305  vi server.js 
+  306  git status
+  307  git add server.js 
+  308  git commit -m "modified server"
+  309  git push -u origin master
+  310  ls
+  311  vi Dockerfile 
+  312  history
+  313  docker volume ls
+  314  systemctl start docker
+  315  systemctl enable docker
+  316  df -h
+  317  docker container ls
+  318  systemctl start docker
+  319  systemctl enable docker
+  320  systemctl status docker
+  321  docker container ls
+  322  docker container ls -a
+  323  docker container stats
+  324  hostnamectl set-hostname --static k8smaster
+  325  bash
+  326  docker container ls
+  327  docker rm mysql:5.7 -force
+  328  docker rm mysql:5.7 --force
+  329  docker rm redis alpine --force
+  330  docker rm 792997b120aa --force
+  331  docker container ls
+  332  docker rm my-web.1.s5dyzcr4lkeskvn3ncv5l224e
+  333  docker rm my-web.1.s5dyzcr4lkeskvn3ncv5l224e --force
+  334  docker rm  project_wordpress_1
+  335  docker rm  project_wordpress_1 --force
+  336  docker container ls
+  337  docker rm 7eda76ec209b 0e7f41d59690  bca29440dab2 --force
+  338  docker rm 2e649d43a3e7 6583f677131e e2bda6612f04 --force
+  339  docker container ls
+  340  docker image prune
+  341  docker ps
+  342  docker container prune
+  343  docker ps
+  344  docker rm c3ece4a96bc9 9c6a223daf9f  2fbf169f5ef3 31ce1b27dc36   --force
+  345  docker container ps
+  346  docker rm 74b0fa6c0273 1e6ec86617d1 2f20cbddebed bcff703ef824 6630f8139a43
+  347  docker rm 74b0fa6c0273 1e6ec86617d1 2f20cbddebed bcff703ef824 6630f8139a43 --force
+  348  docker image prune
+  349  docker container ps
+  350  cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+  351  <
+  352  <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+  353  net.bridge.bridge-nf-call-ip6tables = 1
+  354  net.bridge.bridge-nf-call-iptables = 1
+  355  EOF
+  356  sudo sysctl --system
+  357  cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
+  358  [kubernetes]
+  359  name=Kubernetes
+  360  baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-\$basearch
+  361  enabled=1
+  362  gpgcheck=1
+  363  repo_gpgcheck=1
+  364  gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+  365  EOF
+  366  sudo setenforce 0
+  367  sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+  368  sudo yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+  369  sudo systemctl enable --now kubelet
+  370  systemctl daemon-reload
+  371  systemctl restart kubelet
+  372  history
+  373  systemctl status kubelet
+  374  kubeadmin init --pod-network-cidr=1.0.0.0/16
+  375  kubeadm init --pod-network-cidr=1.0.0.0/16
+  376  kubeadmin init --pod-network-cidr=1.0.0.0/16
+  377  kubeadm init --pod-network-cidr=1.0.0.0/16
+  378    mkdir -p $HOME/.kube
+  379    sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  380    sudo chown $(id -u):$(id -g) $HOME/.kube/config
+  381    mkdir -p $HOME/.kube
+  382    sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  383    sudo chown $(id -u):$(id -g) $HOME/.kube/config
+  384  vi /etc/hosts
+  385  cat /etc/master
+  386  cat /etc/hosts
+  387  vi /etc/hosts
+  388  kubeadm token create --print-join-command
+  389  kubectl get nodes
+  390  kubectl get pod --all-namespaces
+  391  docker ps
+  392  docker rm ee6a2f1486ce --force
+  393  kubectl get nodes
+  394  kubectl get pod
+  395  kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
+  396  kubectl create -f https://docs.projectcalico.org/manifests/custom-resources.yaml
+  397  watch kubectl get pods -n calico-system
+  398  kubectl get pod --all-namespaces
+  399  kubectl delete -f https://docs.projectcalico.org/manifests/custom-resources.yaml
+  400  vi calico.yaml
+  401  kubectl apply -f calico.yaml
+  402  kubectl get pod --all-namespaces
+  403  kubectl get nodes
+  404  kubectl get pod --all-namespaces
+  405  kubectl get nodes
+  406  ls
+  407  cat calico.yaml 
+  408  history
+  409  kubectl get ns
+  410  vi pod.yml
+  411  rm pod.yml 
+  412  vi pod.yml
+  413  mv pod.yml pod.yaml
+  414  kubectl create -f pod.yaml
+  415  vi pod.yml
+  416  vi pod.yaml
+  417  kubectl create -f pod.yaml
+  418  kubectl apply -f pod.yaml
+  419  kubectl get pod
+  420  kubectl describe pod tomcat
+  421  vi pod.yaml
+  422  cp pod.yaml pod2.yaml
+  423  vi pod2.yaml 
+  424  kubectl apply -f pod2.yaml
+  425  vi pod2.yaml 
+  426  kubectl apply -f pod2.yaml
+  427  vi pod2.yaml 
+  428  kubectl apply -f pod2.yaml
+  429  vi pod2.yaml 
+  430  kubectl apply -f pod2.yaml
+  431  vi pod.yaml 
+  432  vi pod2.yaml 
+  433  kubectl create -f pod.yaml
+  434  vi pod2.yaml 
+  435  kubectl create -f pod2.yaml
+  436  vi pod2.yaml 
+  437  kubectl create -f pod2.yaml
+  438  vi pod2.yaml 
+  439  kubectl get nodes
+  440  kubectl describe node k8sworker-1
+  441  get pod --all-namespaces
+  442  kubectl get pod --all-namespaces
+  443  kubectl get pod
+  444  vi pod2.yaml 
+  445  kubectl create -f pod2.yaml
+  446  kubectl delete -f pod2.yaml
+  447  kubectl create -f pod2.yaml
+  448  kubectl apply -f pod2.yaml
+  449  kubectl get pod
+  450  kubectl get pod --all-namespaces
+  451  kubectl get pod
+  452  vi pod2.yaml 
+  453  kubectl get pod
+  454  kubectl get nodes
+  455  vi pod2.yaml 
+  456  kubectl create -f pod2.yaml
+  457  vi pod2.yaml 
+  458  kubectl 
+  459  kubectl get pod
+  460  kubectl delete -f pod2.yaml
+  461  kubectl delete -f pod.yaml
+  462  vi pod2.yaml 
+  463  kubectl create -f pod.yaml
+  464  kubectl create -f pod2.yaml
+  465  kubectl apply -f pod2.yaml
+  466  kubectl apply -f pod.yaml
+  467  kubectl get pod
+  468  kubectl describe pod tomcatdb
+  469  kubectl get pod
+  470  kubectl get nodes
+  471  kubectl get pod
+  472  kubectl create ns que-mem-cpu
+  473  kubectl describe que-mem-cpu
+  474  kubectl describe ns que-mem-cpu
+  475  vi quota.yaml
+  476  kubectl create -f quota.yaml --namespace=que-mem-cpu
+  477  kubectl describe ns que-mem-cpu
+  478  kubectl get resourcequota mem-cpu-demo --namespace=que-mem-cpu --output=yaml
+  479  vi quotapod1.yaml
+  480  kubectl apply -f quotapod1.yaml --namespace=que-mem-cpu
+  481  kubectl apply -f quotapod1.yaml --namespace=quota-mem-cpu
+  482  kubectl apply -f quotapod1.yaml --namespace=quota-mem-cpu-demo
+  483  vi quotapod1.yaml
+  484  kubectl create -f quotapod1.yaml --namespace=quota-mem-cpu-demo
+  485  kubectl apply -f quotapod1.yaml --namespace=quota-mem-cpu-example
+  486  vi quotapod1.yaml 
+  487  kubectl apply -f quotapod1.yaml --namespace=que-mem-cpu-1
+  488  kubectl apply -f quotapod1.yaml --namespace=quota-mem-cpu-example
+  489  kubectl get ns
+  490  kubectl apply -f quotapod1.yaml --namespace=que-mem-cpu
+  491  vi quotapod1.yaml 
+  492  kubectl apply -f quotapod1.yaml --namespace=que-mem-cpu
+  493  vi quotapod1.yaml 
+  494  kubectl apply -f quotapod1.yaml --namespace=que-mem-cpu
+  495  vi quotapod1.yaml 
+  496  kubectl apply -f quotapod1.yaml --namespace=que-mem-cpu
+  497  kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml
+  498  kubectl get pod --all namespaces
+  499  kubectl get pod --all-namespaces
+  500  kubectl proxy
+  501  vi createuser.yaml
+  502  kubectl apply -f createuser.yaml 
+  503  vi role.yaml
+  504  kubectl apply -f role.yaml 
+  505  kubectl get svc --namespace=kubernates-dashboard
+  506  kubectl get svc --namespace=kubernetes-dashboard
+  507* kubectl -n kubernetes-dashboard-7b544877d5-mps6r
+  508  kubectl get pod --all-namespaces
+  509  kubectl get svc
+  510  kubectl edit svc kubernetes
+  511  kubectl get pod --all-namespaces
+  512  kubectl get svc
+  513  kubectl proxy
+  514  kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print $1}')
+  515  kubectl -n kube-system get pod
+  516  kubectl cluster-info
+  517  kubectl get pod --all-namespaces
+  518  vi /etc/kubernetes/admin.conf 
+  519  grep 'client-certificate-data' ~/.kube/config | head -n 1 | awk '{print $2}' | base64 -d >> kubecfg.crt
+  520  grep 'client-key-data' ~/.kube/config | head -n 1 | awk '{print $2}' | base64 -d >> kubecfg.key
+  521  openssl pkcs12 -export -clcerts -inkey kubecfg.key -in kubecfg.crt -out kubecfg.p12
+  522  ls
+  523  kubectl get services --all-namespaces
+  524  kubectl edit svc kubernetes-dashboard
+  525  kubectl edit svc -n kubernetes-dashboard kubernetes-dashboard
+  526  kubectl get services --all-namespaces
+  527  kubectl cluster-info
+  528  kubectl get services --all-namespaces
+  529  kubectl proxy
+  530   ps aux | grep kubectl
+  531  kill -9 2189
+  532  kubectl proxy
+  533  kubectl get services --all-namespaces
+  534  kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep admin-user | awk '{print $1}')
+  535  kubectl get nodes
+  536  kubectl drain k8sworker-1
+  537  kubectl get pod
+  538  kubectl delete pod tomcat
+  539  kubectl delete pod tomcat --force
+  540  kubectl delete pod tomcatdb --force
+  541  kubectl get nodes
+  542  kubectl drain k8sworker-1
+  543  kubectl uncordon k8sworker-1
+  544  kubectl get nodes
+  545  kubectl drain k8sworker-1
+  546  kubectl get nodes
+  547  kubectl get pod
+  548  kubectl uncordon k8sworker-1
+  549  kubectl get nodes
+  550  kubectl drain k8sworker-1
+  551* 
+  552  kubectl uncordon k8sworker-1
+  553  kubectl get nodes
+  554  history
+  555  history > cmds_training.txt
